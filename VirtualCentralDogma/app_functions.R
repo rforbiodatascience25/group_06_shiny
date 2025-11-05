@@ -11,7 +11,7 @@ gene_dna <- function(length,
                                     G_prob = 0.25))
 {
   
-  # Error handling: Make sure the input is divisible by 3
+  # Error handling: Make sure the input is divisible by 3 test
   if( length %% 3 != 0 ){
     stop("The argument to the parameter 'l' has to be divisible by 3")
   }
