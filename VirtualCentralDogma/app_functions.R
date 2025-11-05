@@ -92,8 +92,18 @@ translate_rna <- function(rna){
 # Simple base counts
 base_freqs <- function(dna){
   if (is.null(dna) || dna == "" ){
-    return( data.frame(dna_vec = factor(c("A", "C", "G", "T")),
-                       Freq = c(0, 0, 0, 0)) ) }
+    return( data.frame(
+      dna_vec = factor(c("A", "C", "G", "T")),
+      Freq = c(0, 0, 0, 0)) 
+    ) 
+  }
+  
+  # Check for invalid bases 
+  if (!grepl("^[ACGT]+$", dna)) {
+    stop("Invalid DNA sequence. Must only contain A, C, G, and T.")
+  }
+  
+  # Split into individual bases
   dna_vec <- strsplit(x = dna,
                       split = "")
   base_counts <- table(dna_vec)
