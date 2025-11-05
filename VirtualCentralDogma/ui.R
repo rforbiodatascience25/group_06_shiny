@@ -20,6 +20,14 @@ ui <- fluidPage(
       border-top-right-radius: 8px;
       padding: 10px 15px;
     }
+    .results_bold {
+    background-color: #58728e;
+    background-size: 30
+    % auto;
+    font-weight: bold;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    }
   "))
   ),
   
@@ -82,7 +90,7 @@ ui <- fluidPage(
   layout_columns(
     col_widths = 12,
     card(
-      card_header("Resulting DNA sequence"),
+      card_header("Resulting DNA sequence", class = "results_bold"),
       mainPanel(
         verbatimTextOutput(outputId = "dna")
       )
