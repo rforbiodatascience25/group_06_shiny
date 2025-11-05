@@ -2,7 +2,7 @@
 library("shiny")
 library("bslib")
 library("DT")
-        
+
 # Sourcing the functions:
 source(file = "app_functions.R")
 

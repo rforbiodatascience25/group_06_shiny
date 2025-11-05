@@ -8,6 +8,7 @@ source(file = "app_functions.R")
 
 # Define the User Interface (Frontend)
 ui <- fluidPage(
+  theme = bs_theme(version = 5, bootswatch = "flatly"),
   
   tags$head(
     tags$style(HTML("
@@ -21,12 +22,18 @@ ui <- fluidPage(
       padding: 10px 15px;
     }
     .results_bold {
-    background-color: #58728e;
-    background-size: 30
-    % auto;
-    font-weight: bold;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+      background-color: #58728e;
+      background-size: 30% auto;
+      color: #fff;
+      font-weight: bold;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      padding: .4rem .75rem;
+    }
+    .mono-box{
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      background:#f8f9fa; border:1px solid #dee2e6; border-radius:.5rem;
+      padding:.5rem .75rem; display:inline-block; max-width:100%; overflow-x:auto;
     }
   "))
   ),
@@ -61,39 +68,39 @@ ui <- fluidPage(
                   value = 30,
                   width = "100%"),
       layout_columns(
-        col_widths = c(3, 3, 3, 3),
+        col_widths = c(6, 6, 6, 6),
         numericInput(inputId = "prob_A",
                      label = "Probability of A",
                      value = 0.25,
                      min = 0,
                      max = 1,
-                     step = 0.1),
+                     step = 0.01),
         numericInput(inputId = "prob_T",
                      label = "Probability of T",
                      value = 0.25,
                      min = 0,
                      max = 1,
-                     step = 0.1),
+                     step = 0.01),
         numericInput(inputId = "prob_C",
                      label = "Probability of C",
                      value = 0.25,
                      min = 0,
                      max = 1,
-                     step = 0.1),
+                     step = 0.01),
         numericInput(inputId = "prob_G",
                      label = "Probability of G",
                      value = 0.25,
                      min = 0,
                      max = 1,
-                     step = 0.1)
-      ))),
+                     step = 0.01)
+      )
+    )
+  ),
   layout_columns(
     col_widths = 12,
     card(
       card_header("Resulting DNA sequence", class = "results_bold"),
-      mainPanel(
-        verbatimTextOutput(outputId = "dna")
-      )
+      div(class = "mono-box", textOutput(outputId = "dna", inline = TRUE))
     )
   ), 
   
@@ -103,16 +110,14 @@ ui <- fluidPage(
     card(
       card_header("Virtual RNA polymerase", class = "section_bigger"),
       textInput(inputId = "dna_to_rna_string",
-                label = "Please paste your DNA sequence")
+                label = "Please paste your DNA sequence", placeholder = "e.g. ATTG...")
     )
   ),
   layout_columns(
     col_widths = 12,
     card(
-      card_header("Resulting RNA sequence"),
-      mainPanel(
-        verbatimTextOutput(outputId = "rna")
-      )
+      card_header("Resulting RNA sequence", class = "results_bold"),
+      div(class = "mono-box", textOutput(outputId = "rna", inline = TRUE))
     )
   ),
   
@@ -120,18 +125,16 @@ ui <- fluidPage(
   layout_columns(
     col_width = 12,
     card(
-      card_header("Virtual Ribosome"),
+      card_header("Virtual Ribosome", class = "section_bigger"),
       textInput(inputId = "rna_to_protein",
-                label = "Please paste your RNA sequence")
+                label = "Please paste your RNA sequence", placeholder = "e.g. AUU...")
     )
   ),
   layout_columns(
     col_widths = 12,
     card(
-      card_header("Resulting Protein sequence"),
-      mainPanel(
-        verbatimTextOutput(outputId = "protein")
-      )
+      card_header("Resulting Protein sequence", class = "results_bold"),
+      div(class = "mono-box", textOutput(outputId = "protein", inline = TRUE))
     )
   ),
   
@@ -139,7 +142,7 @@ ui <- fluidPage(
   layout_columns(
     col_width = 12,
     card(
-      card_header("Simple Base Count"),
+      card_header("Simple Base Count", class = "section_bigger"),
       textInput(inputId = "base_count",
                 label = "Please paste your DNA sequence")
     )
@@ -147,12 +150,8 @@ ui <- fluidPage(
   layout_columns(
     col_widths = 12,
     card(
-      card_header("Counted bases in DNA sequence"),
-      mainPanel(
-        dataTableOutput(outputId = "base_counted")
-      )
+      card_header("Counted bases in DNA sequence", class = "results_bold"),
+      DTOutput(outputId = "base_counted")
     )
-  ),
-  
-  
+  )
 )
