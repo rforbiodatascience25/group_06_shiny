@@ -153,5 +153,24 @@ ui <- fluidPage(
       card_header("Counted bases in DNA sequence", class = "results_bold"),
       DTOutput(outputId = "base_counted")
     )
+  ),
+  
+  
+  ### Plotting ###
+  layout_columns(
+    col_width = 12,
+    card(
+      card_header("XXX", class = "section_bigger"),
+      textInput(inputId = "DNA_seq_plot",
+                label = "Please paste your DNA sequence")
+    )
+  ),
+  layout_columns(
+    col_widths = 12,
+    card(
+      card_header("Base frequencies of the DNA sequence", class = "results_bold"),
+      plotOutput(outputId = "plot")
+    )
   )
+  
 )

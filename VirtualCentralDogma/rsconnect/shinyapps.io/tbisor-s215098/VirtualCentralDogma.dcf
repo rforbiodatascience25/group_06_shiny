@@ -5,7 +5,7 @@ account: tbisor-s215098
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 15958472
-bundleId: 11134130
+bundleId: 11140257
 url: https://tbisor-s215098.shinyapps.io/VirtualCentralDogma/
 version: 1
 asMultiple: FALSE
